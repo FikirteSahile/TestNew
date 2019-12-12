@@ -1,0 +1,71 @@
+#%RAML 1.0
+baseUri:
+version: v1
+title: Contact manager API
+types:
+  contactsManager: !include Contacts.raml
+
+/contacts:
+  get:
+    displayName: Get All Contacts
+    description: Retrieves a list of all contacts
+    responses:
+      200:
+        description: Success
+        body:
+          application/json:
+            type: contactsManager
+            example: !include Contactexample.raml
+               
+      400:
+        body:
+          application/json:
+            examples:
+              message: Error retrieving contacts from the database
+  post:
+    displayName: Add contacts
+    body:
+      application/json:
+    responses:
+      201:
+        description: contacts added
+        body:
+          application/json:
+            example: !include Contactexample.raml
+      400:
+        body:
+          application/json:
+            examples:
+              message: Error creating contact data
+  delete:
+    displayName: Delete user by id
+    responses:
+       203:
+         description: Success
+         body:
+            application/json:
+              examples:                
+                message: User successfully deleted
+       400:
+          body:
+            application/json:
+              examples:
+                message: Error deleting user failed
+  put:
+   displayName: Update user by id
+   body:
+     application/json:
+    
+   responses:
+      204:
+          description: Success
+          body:
+            application/json:      
+              examples: 
+                message: User successfully updated
+      400:
+          body:
+            application/json:
+              examples:
+                message: Error updating user failed
+
